@@ -107,7 +107,7 @@ export class ServiceRequestCreatedHandler
     };
 
     await this.mailerManager.sendCustomerStakingRequestServiceEmail(
-      this.gCloudSecretManagerService.getSecret('EMAILS').split(','),
+      process.env.EMAILS,
       context,
     );
   }

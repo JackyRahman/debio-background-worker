@@ -22,10 +22,7 @@ export class EscrowService {
 
   async onModuleInit(): Promise<void> {
     this.provider = await this.ethereumService.getEthersProvider();
-    this.escrowWallet = await new ethers.Wallet(
-      this.gCloudSecretManagerService
-        .getSecret('DEBIO_ESCROW_PRIVATE_KEY')
-        .toString(),
+    this.escrowWallet = await new ethers.Wallet(process.env.DEBIO_ESCROW_PRIVATE_KEY,
       this.provider,
     );
   }
@@ -137,9 +134,7 @@ export class EscrowService {
       const tokenAmount = ethers.utils.parseUnits(String(amount), 18);
       const tokenContract = this.ethereumService.getContract();
       const wallet: WalletSigner = await this.ethereumService.createWallet(
-        this.gCloudSecretManagerService
-          .getSecret('DEBIO_ESCROW_PRIVATE_KEY')
-          .toString(),
+        process.env.DEBIO_ESCROW_PRIVATE_KEY,
       );
       const tokenContractWithSigner = tokenContract.connect(wallet);
       const options = {

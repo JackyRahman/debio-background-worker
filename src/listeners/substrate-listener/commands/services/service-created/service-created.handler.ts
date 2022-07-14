@@ -46,7 +46,7 @@ export class ServiceCreatedHandler
         lab,
       );
       this.mailerManager.sendLabRegistrationEmail(
-        this.gCloudSecretManagerService.getSecret('EMAILS').split(','),
+        process.env.EMAILS.split(','),
         labRegister,
       );
     }

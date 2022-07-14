@@ -10,17 +10,13 @@ require('dotenv').config(); // eslint-disable-line
 @Module({
   imports: [
     CacheModule.registerAsync({
-      inject: [GCloudSecretManagerService],
       useFactory: async (
-        gCloudSecretManagerService: GCloudSecretManagerService,
       ) => {
         return {
           store: redisStore,
-          host: gCloudSecretManagerService.getSecret('REDIS_HOST').toString(),
-          port: gCloudSecretManagerService.getSecret('REDIS_PORT'),
-          auth_pass: gCloudSecretManagerService
-            .getSecret('REDIS_PASSWORD')
-            .toString(),
+          host: process.env.REDIS_HOST,
+          port: process.env.REDIS_PORT,
+          auth_pass: process.env.REDIS_PASSWORD,
         };
       },
     }),

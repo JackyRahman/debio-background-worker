@@ -14,21 +14,13 @@ import { UnstakedService } from './unstaked/unstaked.service';
 @Module({
   imports: [
     ElasticsearchModule.registerAsync({
-      inject: [GCloudSecretManagerService],
       useFactory: async (
-        gCloudSecretManagerService: GCloudSecretManagerService,
       ) => {
         return {
-          node: gCloudSecretManagerService
-            .getSecret('ELASTICSEARCH_NODE')
-            .toString(),
+          node: process.env.ELASTICSEARCH_NODE,
           auth: {
-            username: gCloudSecretManagerService
-              .getSecret('ELASTICSEARCH_USERNAME')
-              .toString(),
-            password: gCloudSecretManagerService
-              .getSecret('ELASTICSEARCH_PASSWORD')
-              .toString(),
+            username: process.env.ELASTICSEARCH_USERNAME,
+            password: process.env.ELASTICSEARCH_PASSWORD,
           },
         };
       },

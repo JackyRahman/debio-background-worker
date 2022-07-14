@@ -17,8 +17,7 @@ export class MailerManager {
   ) {
     let subject = `New Service Request - ${context.service_name} - ${context.city}, ${context.state}, ${context.country}`;
     if (
-      this.gCloudSecretManagerService.getSecret('POSTGRES_HOST').toString() ===
-      'localhost'
+      process.env.POSTGRES_HOST ==='localhost'
     ) {
       subject = `Testing New Service Request Email`;
     }
@@ -33,8 +32,7 @@ export class MailerManager {
   async sendLabRegistrationEmail(to: string | string[], context: LabRegister) {
     let subject = `New Lab Register – ${context.lab_name} - ${context.city}, ${context.state}, ${context.country}`;
     if (
-      this.gCloudSecretManagerService.getSecret('POSTGRES_HOST').toString() ===
-      'localhost'
+      process.env.POSTGRES_HOST === 'localhost'
     ) {
       subject = `Testing New Lab Register Email`;
     }

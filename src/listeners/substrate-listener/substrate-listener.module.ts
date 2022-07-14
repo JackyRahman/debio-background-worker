@@ -43,16 +43,10 @@ import { GCloudSecretManagerService } from '@debionetwork/nestjs-gcloud-secret-m
         gCloudSecretManagerService: GCloudSecretManagerService,
       ) => {
         return {
-          node: gCloudSecretManagerService
-            .getSecret('ELASTICSEARCH_NODE')
-            .toString(),
+          node: process.env.ELASTICSEARCH_NODE,
           auth: {
-            username: gCloudSecretManagerService
-              .getSecret('ELASTICSEARCH_USERNAME')
-              .toString(),
-            password: gCloudSecretManagerService
-              .getSecret('ELASTICSEARCH_PASSWORD')
-              .toString(),
+            username: process.env.ELASTICSEARCH_USERNAME,
+            password: process.env.ELASTICSEARCH_PASSWORD,
           },
         };
       },

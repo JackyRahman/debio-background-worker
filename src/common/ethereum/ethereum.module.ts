@@ -13,7 +13,7 @@ import { GCloudSecretManagerService } from '@debionetwork/nestjs-gcloud-secret-m
         gCloudSecretManagerService: GCloudSecretManagerService,
       ) => {
         return {
-          network: gCloudSecretManagerService.getSecret('WEB3_RPC').toString(),
+          network: process.env.WEB3_RPC,
           useDefaultProvider: true,
         };
       },

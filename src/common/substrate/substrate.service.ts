@@ -26,16 +26,14 @@ export class SubstrateService implements OnModuleInit {
 
   async onModuleInit() {
     this._wsProvider = new WsProvider(
-      this.gCloudSecretManagerService.getSecret('SUBSTRATE_URL').toString(),
+      process.env.SUBSTRATE_URL,
     );
 
     const keyring = new Keyring({ type: 'sr25519' });
     await waitReady();
 
     this._pair = await keyring.addFromUri(
-      this.gCloudSecretManagerService
-        .getSecret('ADMIN_SUBSTRATE_MNEMONIC')
-        .toString(),
+      process.env.ADMIN_SUBSTRATE_MNEMONIC,
     );
 
     await this.startListen();

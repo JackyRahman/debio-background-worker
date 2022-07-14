@@ -17,10 +17,8 @@ import { MailerManager } from './mailer.manager';
             host: 'smtp.gmail.com',
             secure: false,
             auth: {
-              user: gCloudSecretManagerService.getSecret('EMAIL').toString(),
-              pass: gCloudSecretManagerService
-                .getSecret('PASS_EMAIL')
-                .toString(),
+              user: process.env.EMAIL,
+              pass: process.env.PASS_EMAIL,
             },
           },
           template: {

@@ -58,7 +58,7 @@ export class IndexerHandler
     }
 
     this.wsProvider = new WsProvider(
-      this.gCloudSecretManagerService.getSecret('SUBSTRATE_URL').toString(),
+      process.env.SUBSTRATE_URL,
     );
 
     this.wsProvider.on('connected', () => {
@@ -150,8 +150,7 @@ export class IndexerHandler
 
           // check if env is development
           if (
-            this.gCloudSecretManagerService.getSecret('NODE_ENV') ===
-            'development'
+            process.env.NODE_ENV ==='development'
           ) {
             await this.startDevelopment(this.lastBlockNumber);
           }

@@ -1,4 +1,4 @@
-import { GCloudSecretManagerService } from '@debionetwork/nestjs-gcloud-secret-manager';
+import {  } from '@debionetwork/nestjs-gcloud-secret-manager';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
@@ -9,20 +9,15 @@ require('dotenv').config();
 @Module({
   imports: [
     ElasticsearchModule.registerAsync({
-      inject: [GCloudSecretManagerService],
       useFactory: async (
-        gCloudSecretManagerService: GCloudSecretManagerService,
       ) => ({
-        node: gCloudSecretManagerService
-          .getSecret('ELASTICSEARCH_NODE')
-          .toString(),
+        node: 
+          process.env.ELASTICSEARCH_NODE,
         auth: {
-          username: gCloudSecretManagerService
-            .getSecret('ELASTICSEARCH_USERNAME')
-            .toString(),
-          password: gCloudSecretManagerService
-            .getSecret('ELASTICSEARCH_PASSWORD')
-            .toString(),
+          username: 
+            process.env.ELASTICSEARCH_USERNAME,
+          password: 
+            process.env.ELASTICSEARCH_PASSWORD,
         },
       }),
     }),

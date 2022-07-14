@@ -27,16 +27,10 @@ require('dotenv').config();
       ) => {
         return {
           type: 'postgres',
-          host: gCloudSecretManagerService
-            .getSecret('POSTGRES_HOST')
-            .toString(),
+          host: process.env.POSTGRES_HOST,
           port: 5432,
-          username: gCloudSecretManagerService
-            .getSecret('POSTGRES_USERNAME')
-            .toString(),
-          password: gCloudSecretManagerService
-            .getSecret('POSTGRES_PASSWORD')
-            .toString(),
+          username: process.env.POSTGRES_USERNAME,
+          password: process.env.POSTGRES_PASSWORD,
           database: process.env.DB_POSTGRES,
           entities: [EscrowAccounts],
           autoLoadEntities: true,
@@ -51,16 +45,10 @@ require('dotenv').config();
       ) => {
         return {
           type: 'postgres',
-          host: gCloudSecretManagerService
-            .getSecret('POSTGRES_HOST')
-            .toString(),
+          host: process.env.POSTGRES_HOST,
           port: 5432,
-          username: gCloudSecretManagerService
-            .getSecret('POSTGRES_USERNAME')
-            .toString(),
-          password: gCloudSecretManagerService
-            .getSecret('POSTGRES_PASSWORD')
-            .toString(),
+          username: process.env.POSTGRES_USERNAME,
+          password: process.env.POSTGRES_PASSWORD,
           database: process.env.DB_LOCATIONS,
           entities: [...LocationEntities],
           autoLoadEntities: true,
